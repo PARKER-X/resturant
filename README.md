@@ -72,3 +72,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 Demo
 
+![Screenshot (347)](https://user-images.githubusercontent.com/74282916/215434298-79db179f-0d27-46a5-ae77-56a492365ed6.png)
+![Screenshot (348)](https://user-images.githubusercontent.com/74282916/215434362-a24b6e5a-8fa2-4b07-9b8f-5b4d8a55a07a.png)
+![Screenshot (349)](https://user-images.githubusercontent.com/74282916/215434393-6a7c53f0-a23e-4dd5-9098-df1613ab494c.png)
+
+
