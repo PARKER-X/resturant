@@ -3,5 +3,4 @@ const Menu = {{
     image:"safksdf",
     name:"maggi",
     
-
 }};
