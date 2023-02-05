@@ -1,7 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import WeatherCard from "./weathercard";
 import './style.css'
 
+// 1dfaebdfebce65c1015963e4cce4f87c
+
+
+// https://api.openweathermap.org/data/2.5/weather?q=delhi&appid=1dfaebdfebce65c1015963e4cce4f87c
+
 const Temp = () => {
+
+    const [searchValue, setsearchValue] = useState("Mumbai");
+    const [tempInfo, setTempInfo] = useState("");
+
+    const getWeatherInfo = async () => {
+        try{
+            let url = 
+            `https://api.openweathermap.org/data/2.5/weather?q=${searchValue}&appid=1dfaebdfebce65c1015963e4cce4f87c`
+
+            const res = await fetch(url);
+            const data = await res.json();
+            
+
+            const {temp,humidity, pressure} = data.main;
+            const {main:weathermood} = data.weather[0];
+            const {name} = data;
+            const {speed}= data.wind;
+            const {country, sunset} = data.sys;
+
+            const myNewWeatherInfo = {
+                temp, humidity, pressure, weathermood, name, speed, country, sunset
+            };
+
+            setTempInfo(myNewWeatherInfo);
+            // console.log(temp)
+            // console.log(data);
+        }
+        catch(error){
+            console.log(error);
+        }
+    };
+
+    useEffect(() =>{
+        getWeatherInfo();
+    })
     return (<>
 
 
@@ -13,10 +54,14 @@ const Temp = () => {
                     autoFocus
                     id="search"
                     className="searchTerm"
+                    value = { searchValue }
+                    onChange = {(e) => setsearchValue(e.target.value)}
+
                 />
 
                 <button
                     className="searchButton"
+                    onClick={getWeatherInfo}
                     type="button">
                     Search
                 </button>
@@ -25,82 +70,8 @@ const Temp = () => {
 
 
         {/* Temp Card */}
-        <article className="widget">
-            <div className="weatherIcon">
-                <i className={"wi wi-day-sunny"}></i>
-            </div>
-            <div className="weatherInfo" >
-                <div className="temperature">
-                    <span> 25 &deg; </span>
-                </div>
-            
-            <div className="description">
-                <div className="weatherCondition">
-                    Sunny
-                </div>
-                <div className="place">
-                    Pune, India
-                </div>
-            </div>
-            </div>
-
-            <div className="date">
-                {new Date().toLocaleString()}
-            </div>
-
-        {/* Four column section for Extra Information*/}
-        <div className="extra-temp">
-            <div className="temp-info-minmax">
-                {/* 1st section */}
-                <div className="two-sided-section">
-                    <p>
-                        <i className={"wi wi-sunset"}> </i>
-                    </p>
-                    <p className="extra-info-leftside">
-                        20:00 Pm <br/>
-                        sunset 
-                    </p>
-                </div>
-
-                {/* 2nd section */}
-                <div className="two-sided-section">
-                    <p>
-                        <i className={"wi wi-sunset"}> </i>
-                    </p>
-                    <p className="extra-info-leftside">
-                        20:00 Pm <br/>
-                        sunset 
-                    </p>
-                </div>                
-            </div>
-
-            <div className="weather-extra-info">
-            <div className="two-sided-section">
-                    <p>
-                        <i className={"wi wi-sunset"}> </i>
-                    </p>
-                    <p className="extra-info-leftside">
-                        20:00 Pm <br/>
-                        sunset 
-                    </p>
-                </div>
-                
-                <div className="two-sided-section">
-                    <p>
-                        <i className={"wi wi-sunset"}> </i>
-                    </p>
-                    <p className="extra-info-leftside">
-                        20:00 Pm <br/>
-                        sunset 
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-
-        </article>
-
+        
+< WeatherCard tempInfo={tempInfo} />
 
 
 
