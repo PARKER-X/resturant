@@ -15,7 +15,7 @@ const Temp = () => {
     const getWeatherInfo = async () => {
         try{
             let url = 
-            `https://api.openweathermap.org/data/2.5/weather?q=${searchValue}&appid=1dfaebdfebce65c1015963e4cce4f87c`
+            `https://api.openweathermap.org/data/2.5/weather?q=${searchValue}&units=metric&appid=1dfaebdfebce65c1015963e4cce4f87c`
 
             const res = await fetch(url);
             const data = await res.json();
